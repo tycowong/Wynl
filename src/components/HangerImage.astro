@@ -1,0 +1,22 @@
+---
+interface Props {
+  imageUrl: string;
+  altText: string;
+}
+
+import Image from "astro/components/Image.astro";
+import Hanger from "../assets/icons/hanger.svg";
+
+const { imageUrl, altText } = Astro.props;
+const size = 320;
+---
+
+<div class=`max-h-[${size}px]`>
+  <Image
+    src={imageUrl}
+    alt={altText}
+    height={size}
+    width={size}
+    class="hover:mb-6 hover:mt-0 mt-6 duration-300 relative"
+  /><Hanger class="relative -top-80 -mb-80 scale-[101%] pointer-events-none" />
+</div>
