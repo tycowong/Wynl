@@ -13,10 +13,16 @@ console.log(access_token);
       const data = await getAlbumDetails(id);
 
       const artwork_uri = data["images"][0]["url"];
+
+      const albumName = data["name"];
+      const artist = data["artists"][0]["name"];
+
       return (
         <HangerImage
           imageUrl={artwork_uri}
           altText={`Artwork form the album ${data["name"]} by ${data["artists"][0]["name"]}`}
+          albumName={data["name"]}
+          artists={artist}
         />
       );
     })

@@ -1,22 +1,30 @@
 ---
 interface Props {
   imageUrl: string;
+  albumName: string;
+  artists: string;
   altText: string;
 }
 
 import Image from "astro/components/Image.astro";
 import Hanger from "../assets/icons/hanger.svg";
 
-const { imageUrl, altText } = Astro.props;
+const { imageUrl, altText, artists, albumName } = Astro.props;
 const size = 320;
 ---
 
-<div class=`max-h-[${size}px]`>
-  <Image
-    src={imageUrl}
-    alt={altText}
-    height={size}
-    width={size}
-    class="hover:mb-6 hover:mt-0 mt-6 duration-300 relative"
-  /><Hanger class="relative -top-80 -mb-80 scale-[101%] pointer-events-none" />
+<div class="felx flex-col justify-items-center hover:cursor-pointer">
+  <div class=`max-h-[${size}px] mb-5`>
+    <Image
+      src={imageUrl}
+      alt={altText}
+      height={size}
+      width={size}
+      class="hover:mb-6 hover:mt-0 mt-6 duration-300 relative"
+    /><Hanger
+      class="relative -top-80 -mb-80 scale-[101%] pointer-events-none"
+    />
+  </div>
+  <h2><b>{albumName}</b></h2>
+  <h3>{artists}</h3>
 </div>
