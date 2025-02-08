@@ -1,35 +1,16 @@
 ---
 import { album_ids } from "../db/my_collection.json";
-import { Image } from "astro:assets";
 import HangerImage from "./HangerImage.astro";
+import { getAccessToken, getAlbumDetails } from "../scripts/spottify-api";
 
-const access_token_reponse = await fetch(
-  "https://accounts.spotify.com/api/token",
-  {
-    method: "POST",
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id: import.meta.env.SPOTIFY_ID,
-      client_secret: import.meta.env.CLIENT_SECRET,
-    }),
-  }
-);
-
-const access_token = await access_token_reponse.json();
+const access_token = await getAccessToken();
 console.log(access_token);
 ---
 
 <section class="flex flex-row flex-wrap gap-10 items-center justify-center">
   {
     album_ids.map(async (id) => {
-      const response = await fetch(`https://api.spotify.com/v1/albums/${id}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${access_token["access_token"]}`,
-        },
-      });
-
-      const data = await response.json();
+      const data = await getAlbumDetails(id);
 
       const artwork_uri = data["images"][0]["url"];
       return (
