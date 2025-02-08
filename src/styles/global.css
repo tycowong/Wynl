@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+.light {
+  --bgc: #b19bd9;
+  background-image: radial-gradient(var(--bgc) 10%, #fff 80%);
+}
+
+.dark {
+  --bgc: #ef5509;
+  background-image: radial-gradient(var(--bgc), #fff);
+}
